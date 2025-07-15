@@ -15,6 +15,23 @@ Key features of Kustomize include:
 
 ---
 
+h2. How to Use This Guide for Kustomize Troubleshooting
+
+When you encounter an issue with your Kustomize configurations, the primary tool for diagnosis is the `kustomize build` command. This command processes your `kustomization.yaml` and all referenced resources, outputting the final, merged Kubernetes YAML. Any errors in your Kustomize setup will typically manifest during this build process.
+
+*   **`kustomize build <path-to-kustomization>`**
+    *   **Purpose:** Generates the final Kubernetes manifest by applying all Kustomize transformations (bases, overlays, patches, etc.). This command *does not* interact with your Kubernetes cluster; it only performs local validation and rendering.
+    *   **Usage:**
+        *   `kustomize build .`: Builds the Kustomize configuration in the current directory.
+        *   `kustomize build overlays/production`: Builds a specific overlay.
+    *   **What to look for:**
+        *   **Error Messages:** Kustomize will output detailed error messages if it encounters issues like missing files, invalid YAML syntax, or patching conflicts. These messages are crucial for identifying the problem.
+        *   **Generated YAML:** Even if there are no errors, inspecting the generated YAML can help you verify that Kustomize is producing the desired output. You can pipe the output to a file for easier review: `kustomize build . > output.yaml`.
+
+Once you observe an error message from `kustomize build`, you can then refer to the scenarios below to find a matching problem description and its solution.
+
+---
+
 h2. Troubleshooting Scenarios
 
 h3. Scenario 1: Resource File Not Found
@@ -23,7 +40,7 @@ This is one of the most common errors, where a resource file specified in the `k
 
 *Error Message:*
 
-When you run `kubectl apply -k .` or `kustomize build .`, you will see an error similar to this:
+When you run `kustomize build .`, you will see an error similar to this:
 
 {code}
 Error: accumulating resources: accumulation err='accumulating resources from '../base': '../base/deployment.yaml': no such file or directory': recursed from path '.'
