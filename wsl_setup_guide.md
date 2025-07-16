@@ -133,16 +133,13 @@ This step installs essential command-line tools for interacting with Kubernetes 
     {code}
     _Explanation:_ Kustomize is a tool for customizing Kubernetes configurations without templating. It allows you to manage multiple variations of your application configuration.
 
-4.  **Install k9s and stern (Additional Tools):**
+4.  **Install k9s(Additional Tools):**
     {code:bash}
     curl -sS https://webi.sh/k9s | sh
-    source ~/.config/envman/PATH.env
-    curl -sS https://webi.sh/stern | sh
     source ~/.config/envman/PATH.env
     {code}
     _Explanation:_
     *   `k9s`: A terminal UI for Kubernetes clusters, providing a visual way to navigate, observe, and manage your applications.
-    *   `stern`: A multi-pod and container log tailing tool for Kubernetes, allowing you to view logs from multiple sources simultaneously.
 
 h2. Step 7: Open WSL in Visual Studio Code
 
@@ -234,10 +231,8 @@ curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack
 sudo mv kustomize /usr/local/bin/
 
 # --- Install Additional Tools ---
-echo "Installing k9s and stern..."
+echo "Installing k9s..."
 curl -sS https://webi.sh/k9s | sh
-source ~/.config/envman/PATH.env
-curl -sS https://webi.sh/stern | sh
 source ~/.config/envman/PATH.env
 
 echo "\n--- SETUP COMPLETE ---"
@@ -275,7 +270,6 @@ check_command kubectl
 check_command helm
 check_command kustomize
 check_command k9s
-check_command stern
 check_command zsh
 check_command fzf
 
