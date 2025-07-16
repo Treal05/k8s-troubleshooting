@@ -112,7 +112,7 @@ This step installs essential command-line tools for interacting with Kubernetes 
 
         To make this persistent for Zsh (add to `~/.zshrc`):
         {code:bash}
-        echo 'export KUBECONFIG=~/.kube/config:$(find ~/.kube/ -maxdepth 1 -name '''cluster-*.yaml''' -print0 | xargs -0 echo | tr ''' ''' ''':'')' >> ~/.zshrc
+        echo "export KUBECONFIG=~/.kube/config:$(find ~/.kube/ -maxdepth 1 -name '*.yaml' -print0 | xargs -0 echo | tr ' ' ':')" >> ~/.zshrc
         {code}
         _Explanation:_ This command appends the `export KUBECONFIG` line to your `~/.zshrc` file. This ensures that every time you open a new Zsh terminal, the `KUBECONFIG` environment variable is automatically set with all your cluster configurations, making them immediately available to `kubectl`.
 
@@ -217,7 +217,7 @@ rm kubectl
 # --- Configure Kubeconfig Files ---
 echo "Creating ~/.kube directory and configuring KUBECONFIG..."
 mkdir -p ~/.kube
-echo 'export KUBECONFIG=~/.kube/config:$(find ~/.kube/ -maxdepth 1 -name '''cluster-*.yaml''' -print0 | xargs -0 echo | tr ''' ''' ''':'')' >> ~/.zshrc
+echo "export KUBECONFIG=~/.kube/config:$(find ~/.kube/ -maxdepth 1 -name '*.yaml' -print0 | xargs -0 echo | tr ' ' ':')" >> ~/.zshrc
 
 echo "Installing Helm..."
 curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
